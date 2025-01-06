@@ -1,0 +1,37 @@
+/* ClassPage.css */
+
+/* General styles for the page */
+h1 {
+    font-size: 1.5rem; /* Matches "text-2xl" */
+    font-weight: bold;
+    margin-bottom: 1rem; /* Matches "mb-4" */
+}
+
+/* Table styles */
+table {
+    width: 100%; /* Matches "w-full" */
+    border-collapse: collapse; /* Matches "border-collapse" */
+    text-align: left; /* Matches "text-left" */
+    border: 1px solid #d1d5db; /* Matches "border-gray-300" */
+}
+
+thead {
+    background-color: #e5e7eb; /* Matches "bg-gray-200" */
+}
+
+th,
+td {
+    border: 1px solid #d1d5db; /* Matches "border-gray-300" */
+    padding: 0.5rem 1rem; /* Matches "px-4 py-2" */
+}
+
+tbody tr:hover {
+    background-color: #f3f4f6; /* Matches "hover:bg-gray-100" */
+}
+
+/* Empty data fallback styling */
+td[colspan="3"] {
+    text-align: center;
+    font-style: italic;
+    color: #6b7280; /* Slightly muted color */
+}
