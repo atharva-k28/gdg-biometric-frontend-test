@@ -45,7 +45,7 @@ export default function ClassPage({ params }) {
             {attendanceData.length > 0 ? (
               attendanceData.map((stud) => (
                 <tr
-                  key={stud.prn}
+                  key={stud._id}
                   className="hover:bg-blue-50 transition-colors"
                 >
                   <td className="py-3 px-2 sm:px-4 lg:px-6 border-b border-blue-700 text-xs sm:text-sm lg:text-base text-gray-700">
