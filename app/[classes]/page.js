@@ -1,13 +1,20 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import React, {useEffect, useState } from "react";
 
 export default function ClassPage({ params }) {
   const { classes: className } = React.use(params);
+
+  const searchParams = useSearchParams();
+  const start = searchParams.get("start");
+  const end = searchParams.get("end");
+
+  console.log(start,end);
+
   const [attendanceData, setAttendanceData] = useState([]);
 
   const fetchData = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/get?class=${className}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/get?class=${className}&start=${start}&end=${end}`);
     const data = await res.json();
     console.log(data);
     setAttendanceData(data.data);
@@ -43,7 +50,12 @@ export default function ClassPage({ params }) {
           </thead>
           <tbody>
             {attendanceData.length > 0 ? (
-              attendanceData.map((stud) => (
+              attendanceData.map((stud) => {
+                const fullDate = new Date(stud.date);
+                const date = fullDate.toISOString().split('T')[0]; 
+                const time = fullDate.toTimeString().split(' ')[0]; 
+
+                return(
                 <tr
                   key={stud._id}
                   className="hover:bg-blue-50 transition-colors"
@@ -55,13 +67,13 @@ export default function ClassPage({ params }) {
                     {stud.name}
                   </td>
                   <td className="py-3 px-2 sm:px-4 lg:px-6 border-b border-blue-700 text-xs sm:text-sm lg:text-base text-gray-700">
-                    {stud.date}
+                    {date}
                   </td>
                   <td className="py-3 px-2 sm:px-4 lg:px-6 border-b border-blue-700 text-xs sm:text-sm lg:text-base text-gray-700">
-                    {stud.time}
+                    {time}
                   </td>
                 </tr>
-              ))
+              )})
             ) : (
               <tr>
                 <td

@@ -18,11 +18,13 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 w-full max-w-3xl justify-center">
         {classes.map((className) => (
-          <Link key={className} href={`/${className}`} passHref>
+          <>
+          <Link key={className} href={`/${className}/form`} passHref>
             <button className="w-full max-w-xs text-sm sm:text-base lg:text-lg font-semibold text-white bg-blue-700 py-2 sm:py-3 px-4 sm:px-6 rounded-md shadow-md hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 transition-transform duration-300 transform hover:scale-105">
               {className}
             </button>
           </Link>
+          </>
         ))}
       </div>
     </div>
