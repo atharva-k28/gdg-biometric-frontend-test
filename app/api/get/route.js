@@ -14,9 +14,10 @@ export async function GET(req) {
     ?{class:className}
     :{};
 
-    (startDate && endDate)
-    ?filter.date = {$gte: new Date(startDate),$lte: new Date(endDate)}
-    :null
+    if(startDate && endDate){
+        filter.date = {$gte: new Date(startDate),$lte: new Date(endDate)}
+    }
+    
 
     const data = await MyData.find(filter); // Fetch all data
     return new Response(JSON.stringify({ success: true, data }), { status: 200 });
