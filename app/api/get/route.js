@@ -6,11 +6,17 @@ export async function GET(req) {
 
     const url = new URL(req.url);
     const className = url.searchParams.get('class');
-
+    const startDate = url.searchParams.get('start');
+    const endDate = url.searchParams.get('end');
   try {
 
-    const filter = className && !['everyone','all','sol'].includes(className)
-    ?{class:className}:{};
+    const filter = (className) && !['everyone','all','sol'].includes(className)
+    ?{class:className}
+    :{};
+
+    (startDate && endDate)
+    ?filter.date = {$gte: new Date(startDate),$lte: new Date(endDate)}
+    :null
 
     const data = await MyData.find(filter); // Fetch all data
     return new Response(JSON.stringify({ success: true, data }), { status: 200 });
